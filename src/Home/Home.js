@@ -11,12 +11,19 @@ class Home extends Component {
         this.props.auth.popUpLogin();
     };
 
-    lockLogin = () => {
+    showLocklogin = () => {
+        const { isAuthenticated } = this.props.auth;
+
+        if (isAuthenticated()) { return; }
         this.props.lock.login();
     };
 
     componentDidMount = () => {
-        this.props.lock.login();
+        this.showLocklogin();
+    };
+
+    componentDidUpdate = () => {
+        this.showLocklogin();
     };
 
     render() {
